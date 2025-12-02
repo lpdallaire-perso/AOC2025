@@ -23,20 +23,8 @@ void Puzzle1::Solve1()
 		{
 			arrow += value;
 		}
-		else
-		{
-			std::cout << "Invalid direction: " << direction << std::endl;
-			return;
-		}
-
-		if (arrow < 0)
-		{
-			arrow += 100;
-		}
-		else if (arrow >= 100)
-		{
-			arrow -= 100;
-		}
+		
+		arrow = (arrow + 100) % 100;
 		
 		if (arrow == 0)
 		{ 
@@ -78,12 +66,8 @@ void Puzzle1::Solve2()
 			}
 			arrow = (arrow + value) % 100;
 		}
-		else
-		{
-			std::cout << "Invalid direction: " << direction << std::endl;
-			return;
-		}
 	}
 
 	std::cout << "Puzzle 1.2: The arrow pointed to 0 " << counter << " times." << std::endl;
+
 }
