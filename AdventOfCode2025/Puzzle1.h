@@ -1,10 +1,9 @@
 #pragma once
 class Puzzle1
 {
-	public:
-		~Puzzle1() = default;
-		
+	public:		
 		void Solve1();
 		void Solve2();
 };
+
 
