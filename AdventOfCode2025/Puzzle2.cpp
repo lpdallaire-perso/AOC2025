@@ -80,7 +80,7 @@ void Puzzle2::Solve1()
 		}
 	}
 
-	std::cout << "Puzzle 2.1" << std::endl;
+	std::cout << "Puzzle 2.1:" << finalCount << std::endl;
 }
 
 void Puzzle2::Solve2()
@@ -112,5 +112,6 @@ void Puzzle2::Solve2()
 		}
 	}
 
-	std::cout << "Puzzle 2.2" << std::endl;
+	std::cout << "Puzzle 2.2: " << finalCount << std::endl;
 }
+
