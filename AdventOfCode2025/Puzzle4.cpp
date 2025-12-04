@@ -1,8 +1,6 @@
 #include "Puzzle4.h"
 #include <iostream>
 #include <fstream>
-#include <vector>
-#include <algorithm>
 #include <string>
 
 constexpr int MAX_NEIGHBORS = 4;
@@ -22,7 +20,7 @@ bool IsValidCell(const std::string& map, size_t mapWidth, size_t cellID)
 	if (!IsBlocked(map[cellID]))
 		return false;
 
-	bool isTopRow = cellID < mapWidth;;
+	bool isTopRow = cellID < mapWidth;
 	bool isBottomRow = cellID >= (map.size() - mapWidth);
 	bool isLeftColumn = (cellID % mapWidth == 0);
 	bool isRightColumn = (cellID % mapWidth == mapWidth - 1);
@@ -71,14 +69,14 @@ void Puzzle4::Solve1()
 	size_t mapWidth = 0;
 	size_t validCellCount = 0;
 
-	while (std::getline(inputFile, line)) 
+	while (std::getline(inputFile, line))
 	{
 		mapWidth = line.length();
 		floorMap += line;
 	}
 
 	for (size_t i = 0; i < floorMap.length(); i++)
-	{		
+	{
 		if (IsValidCell(floorMap, mapWidth, i))
 			validCellCount++;
 	}
@@ -101,7 +99,7 @@ void Puzzle4::Solve2()
 	}
 
 	bool removedCell;
-	do 
+	do
 	{
 		removedCell = false;
 		for (size_t i = 0; i < floorMap.length(); i++)
@@ -118,5 +116,3 @@ void Puzzle4::Solve2()
 
 	std::cout << "Puzzle 4.2: " << validCellCount << std::endl;
 }
-
-
