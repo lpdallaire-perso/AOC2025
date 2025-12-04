@@ -25,8 +25,8 @@ bool IsValidCell(const std::string& map, size_t mapWidth, size_t cellID)
 	bool isTopRow = cellID < mapWidth;;
 	bool isBottomRow = cellID >= (map.size() - mapWidth);
 	bool isLeftColumn = (cellID % mapWidth == 0);
-	bool isRightColumn = false;
-	size_t neighborCount = (cellID % mapWidth == mapWidth - 1);
+	bool isRightColumn = (cellID % mapWidth == mapWidth - 1);
+	size_t neighborCount = 0;
 
 	// Top
 	if (!isTopRow && IsBlocked(map[cellID - mapWidth]))
@@ -118,4 +118,5 @@ void Puzzle4::Solve2()
 
 	std::cout << "Puzzle 4.2: " << validCellCount << std::endl;
 }
+
 
