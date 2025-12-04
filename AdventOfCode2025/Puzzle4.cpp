@@ -5,66 +5,62 @@
 #include <algorithm>
 #include <string>
 
-const int maxCount = 4;
+constexpr int MAX_NEIGHBORS = 4;
+constexpr char BLOCKED_CHAR = '@';
+constexpr char EMPTY_CHAR = '.';
 
-bool IsPaper(char value)
+bool IsBlocked(char value)
 {
-	return value == '@';
+	return value == BLOCKED_CHAR;
 }
 
-bool IsValidCell(std::string& map, size_t mapWidth, size_t cellID)
+bool IsValidCell(const std::string& map, size_t mapWidth, size_t cellID)
 {
 	if (cellID >= map.length()) // out of bound
 		return false;
 
-	if (!IsPaper(map[cellID]))
+	if (!IsBlocked(map[cellID]))
 		return false;
 
-	bool isTopRow = false;
-	bool isBottomRow = false;
-	bool isLeftColumn = false;
+	bool isTopRow = cellID < mapWidth;;
+	bool isBottomRow = cellID >= (map.size() - mapWidth);
+	bool isLeftColumn = (cellID % mapWidth == 0);
 	bool isRightColumn = false;
-	int validCount = 0;
+	size_t neighborCount = (cellID % mapWidth == mapWidth - 1);
 
-	isTopRow = cellID < mapWidth;
-	isBottomRow = cellID >= (map.size() - mapWidth);
-	isLeftColumn = (cellID % mapWidth == 0);
-	isRightColumn = (cellID % mapWidth == mapWidth - 1);
-
-	
 	// Top
-	if (!isTopRow && IsPaper(map[cellID - mapWidth]))
-		validCount++;
+	if (!isTopRow && IsBlocked(map[cellID - mapWidth]))
+		neighborCount++;
 
 	// Top left
-	if (!isTopRow && !isLeftColumn && IsPaper(map[cellID - mapWidth - 1]))
-		validCount++;
+	if (!isTopRow && !isLeftColumn && IsBlocked(map[cellID - mapWidth - 1]))
+		neighborCount++;
 
 	// Top right
-	if (!isTopRow && !isRightColumn && IsPaper(map[cellID - mapWidth + 1]))
-		validCount++;
+	if (!isTopRow && !isRightColumn && IsBlocked(map[cellID - mapWidth + 1]))
+		neighborCount++;
 
 	// Bottom
-	if (!isBottomRow && IsPaper(map[cellID + mapWidth]))
-		validCount++;
+	if (!isBottomRow && IsBlocked(map[cellID + mapWidth]))
+		neighborCount++;
 
 	// Bottom left
-	if (!isBottomRow && !isLeftColumn && IsPaper(map[cellID + mapWidth - 1]))
-		validCount++;
+	if (!isBottomRow && !isLeftColumn && IsBlocked(map[cellID + mapWidth - 1]))
+		neighborCount++;
 
 	// Bottom right
-	if (!isBottomRow && !isRightColumn && IsPaper(map[cellID + mapWidth + 1]))
-		validCount++;
+	if (!isBottomRow && !isRightColumn && IsBlocked(map[cellID + mapWidth + 1]))
+		neighborCount++;
 
 	// Left
-	if (!isLeftColumn && IsPaper(map[cellID - 1]))
-		validCount++;
+	if (!isLeftColumn && IsBlocked(map[cellID - 1]))
+		neighborCount++;
 
 	// Right
-	if (!isRightColumn && IsPaper(map[cellID + 1]))
-		validCount++;
+	if (!isRightColumn && IsBlocked(map[cellID + 1]))
+		neighborCount++;
 
-	return validCount < maxCount;
+	return neighborCount < MAX_NEIGHBORS;
 }
 
 void Puzzle4::Solve1()
@@ -73,8 +69,7 @@ void Puzzle4::Solve1()
 	std::string floorMap;
 	std::string line;
 	size_t mapWidth = 0;
-
-	size_t accessibleCell = 0;
+	size_t validCellCount = 0;
 
 	while (std::getline(inputFile, line)) 
 	{
@@ -85,10 +80,10 @@ void Puzzle4::Solve1()
 	for (size_t i = 0; i < floorMap.length(); i++)
 	{		
 		if (IsValidCell(floorMap, mapWidth, i))
-			accessibleCell++;
+			validCellCount++;
 	}
 
-	std::cout << "Puzzle 4.1: " << accessibleCell << std::endl;
+	std::cout << "Puzzle 4.1: " << validCellCount << std::endl;
 }
 
 void Puzzle4::Solve2()
@@ -97,8 +92,7 @@ void Puzzle4::Solve2()
 	std::string floorMap;
 	std::string line;
 	size_t mapWidth = 0;
-
-	size_t accessibleCell = 0;
+	size_t validCellCount = 0;
 
 	while (std::getline(inputFile, line))
 	{
@@ -116,11 +110,11 @@ void Puzzle4::Solve2()
 			{
 				floorMap[i] = '.';
 				removedCell = true;
-				accessibleCell++;
+				validCellCount++;
 			}
 		}
 
 	} while (removedCell);
 
-	std::cout << "Puzzle 4.2: " << accessibleCell << std::endl;
+	std::cout << "Puzzle 4.2: " << validCellCount << std::endl;
 }
