@@ -108,7 +108,7 @@ void Puzzle4::Solve2()
 		{
 			if (IsValidCell(floorMap, mapWidth, i))
 			{
-				floorMap[i] = '.';
+				floorMap[i] = EMPTY_CHAR;
 				removedCell = true;
 				validCellCount++;
 			}
@@ -118,3 +118,4 @@ void Puzzle4::Solve2()
 
 	std::cout << "Puzzle 4.2: " << validCellCount << std::endl;
 }
+
