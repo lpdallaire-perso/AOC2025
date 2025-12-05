@@ -42,12 +42,10 @@ void Puzzle5::Solve1()
         if (!rangesDone)
         {
             size_t dashPos = line.find('-');
-            if (dashPos != std::string::npos)
-            {
-                long long start = std::stoll(line.substr(0, dashPos));
-                long long end = std::stoll(line.substr(dashPos + 1));
-                freshRanges.push_back({ start, end });
-            }
+
+            long long start = std::stoll(line.substr(0, dashPos));
+            long long end = std::stoll(line.substr(dashPos + 1));
+            freshRanges.push_back({ start, end });
         }
         else 
         {
@@ -85,12 +83,11 @@ void Puzzle5::Solve2()
         }
 
         size_t dashPos = line.find('-');
-        if (dashPos != std::string::npos)
-        {
-            long long start = std::stoll(line.substr(0, dashPos));
-            long long end = std::stoll(line.substr(dashPos + 1));
-            freshRanges.push_back({ start, end });
-        }
+
+        long long start = std::stoll(line.substr(0, dashPos));
+        long long end = std::stoll(line.substr(dashPos + 1));
+        freshRanges.push_back({ start, end });
+
     }
 
 
@@ -119,3 +116,4 @@ void Puzzle5::Solve2()
     std::cout << "Puzzle 5.2: " << freshCount << std::endl;
 
 }
+
