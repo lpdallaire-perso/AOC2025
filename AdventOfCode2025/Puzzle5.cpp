@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <sstream>
 #include <vector>
 #include <string>
 #include <algorithm>
@@ -118,4 +117,5 @@ void Puzzle5::Solve2()
     }
 
     std::cout << "Puzzle 5.2: " << freshCount << std::endl;
+
 }
