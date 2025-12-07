@@ -40,12 +40,12 @@ size_t ParseQuantumManifold(const std::vector<std::string>& lines, int curLine, 
 {
 	if (curLine >= lines.size())
 	{
-		size_t total = 0;
+		size_t totalTimelines = 0;
 		for (const auto& pair : tachyonCounts)
 		{
-			total += pair.second;
+			totalTimelines += pair.second;
 		}
-		return total;
+		return totalTimelines;
 	}
 
 	std::map<size_t, size_t> nextTachyonCounts;
@@ -103,3 +103,4 @@ void Puzzle7::Solve2()
 	size_t totalTimelines = ParseQuantumManifold(lines, 1, tachyonCounts);
 	std::cout << "Puzzle 7.2: " << totalTimelines << std::endl;
 }
+
