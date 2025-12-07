@@ -8,6 +8,11 @@
 
 size_t ParseManifold(const std::vector<std::string>& lines, int curLine, const std::vector<size_t> tachyons)
 {
+	if (curLine >= lines.size())
+	{
+		return 0;
+	}
+
 	std::set<size_t> nextTachyons; // Use set to avoid duplicates
 	size_t splitCount = 0;
 	for(size_t curTachyon : tachyons)
@@ -25,11 +30,8 @@ size_t ParseManifold(const std::vector<std::string>& lines, int curLine, const s
 		}
 	}
 	
-	if (curLine < lines.size() - 1)
-	{
-		std::vector<size_t> nextTachyonsVec(nextTachyons.begin(), nextTachyons.end());
-		splitCount += ParseManifold(lines, curLine + 1, nextTachyonsVec);
-	}
+	std::vector<size_t> nextTachyonsVec(nextTachyons.begin(), nextTachyons.end());
+	splitCount += ParseManifold(lines, curLine + 1, nextTachyonsVec);
 
 	return splitCount;
 }
@@ -50,14 +52,10 @@ size_t ParseQuantumManifold(const std::vector<std::string>& lines, int curLine, 
 
 	for (const auto& [pos, tachyonCount] : tachyonCounts)
 	{
-		if (pos >= lines[curLine].size()) continue;
-
 		if (lines[curLine][pos] == '^')
 		{
-			if (pos > 0)
-				nextTachyonCounts[pos - 1] += tachyonCount;
-			if (pos < lines[curLine].size() - 1)
-				nextTachyonCounts[pos + 1] += tachyonCount;
+			nextTachyonCounts[pos - 1] += tachyonCount;
+			nextTachyonCounts[pos + 1] += tachyonCount;
 		}
 		else
 		{
