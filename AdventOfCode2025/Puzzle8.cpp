@@ -91,15 +91,15 @@ void Puzzle8::Solve1()
         circuitSizes[FindRoot(root, i)]++;
     }
 
-    std::vector<int> sizes;
+    std::vector<int> sortedSizes;
     for (const auto& [_, size] : circuitSizes)
     {
-        sizes.push_back(size);
+        sortedSizes.push_back(size);
     }
 
-    std::sort(sizes.rbegin(), sizes.rend());
+    std::sort(sortedSizes.rbegin(), sortedSizes.rend());
 
-    long long result = (long long)sizes[0] * sizes[1] * sizes[2];
+    long long result = (long long)sortedSizes[0] * sortedSizes[1] * sortedSizes[2];
 
     std::cout << "Puzzle 9.1: " << result << std::endl;
 }
@@ -115,7 +115,6 @@ void Puzzle8::Solve2()
     }
 
     size_t numPos = positions.size();
-    size_t numCircuits = numPos;
 
     // Generate all connections and sort by distance
     std::vector<Connection> connections;
@@ -137,11 +136,11 @@ void Puzzle8::Solve2()
 
     int lastConnected1 = -1, lastConnected2 = -1;
 
+    size_t numCircuits = numPos;
     for (const auto& conn : connections)
     {
         int rootFirst = FindRoot(root, conn.first);
         int rootSecond = FindRoot(root, conn.second);
-
 
         if (rootFirst != rootSecond)
         {
@@ -159,4 +158,5 @@ void Puzzle8::Solve2()
 
     long long result = (long long)positions[lastConnected1].x * positions[lastConnected2].x;
     std::cout << "Puzzle 9.2: " << result << std::endl;
+
 }
