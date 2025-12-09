@@ -2,10 +2,6 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include <sstream>
-#include <algorithm>
-#include <set>
-#include <map>
 
 #include "Puzzle9.h"
 
@@ -17,7 +13,7 @@ void Puzzle9::Solve1()
     std::string line;
     long long coord1, coord2;
     char separator;
-    // Read input
+    
     while (inputFile >> coord1 >> separator >> coord2)
     {
 		redTiles.push_back({ coord1, coord2 });
@@ -45,4 +41,5 @@ void Puzzle9::Solve2()
 {
 
     std::cout << "Puzzle 9.2: " << std::endl;
+
 }
